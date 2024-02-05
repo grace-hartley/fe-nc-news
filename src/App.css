@@ -10,28 +10,59 @@
 header {
   display: flex;
   justify-content: space-between;
+  margin: 0;
+  align-items: center;
+  background-color: brown;
 }
 h1 {
   font-size: 2em;
   line-height: 1.1;
+  color: white;
+  text-decoration: none;
+}
+nav {
+  display: flex;
+  align-items: center;
+}
+
+button {
+  border-radius: 50px;
+  border: 1px solid transparent;
+  padding: 0.6em 1em;
+  font-size: 0.5em;
+  font-weight: 500;
+  font-family: inherit;
+}
+.user-profile-button {
+  display: flex;
+}
+.user-profile-button p {
+  margin-right: 5px;
+  text-decoration: none;
 }
 
 .article-img {
   max-width: 100%;
 }
 
-li {
+ul {
   list-style-type: none;
+  margin-left: 0;
+  padding-left: 0;
 }
 .article-list {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
+  align-items: center;
 }
-.article {
+.article-list-item {
+  border-radius: 15px;
   border: 1px solid rgb(115, 0, 0);
   padding: 10px;
   margin: 10px;
 }
+
 @media screen and (max-width: 300px) {
   .article {
     width: 100%;

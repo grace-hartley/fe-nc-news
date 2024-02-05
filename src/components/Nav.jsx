@@ -11,12 +11,14 @@ const Nav = () => {
           <button>Change User</button>
         </Link>
         <Link to={`/users/${loggedInUser.username}`}>
-          <p>{loggedInUser.username}</p>
-          <img
-            src={loggedInUser.avatar_url}
-            alt={`avatar image for ${loggedInUser.username}`}
-            className="avatar"
-          />
+          <button className="user-profile-button">
+            <p>{loggedInUser.username}</p>
+            <img
+              src={loggedInUser.avatar_url}
+              alt={`avatar image for ${loggedInUser.username}`}
+              className="avatar"
+            />
+          </button>
         </Link>
       </nav>
     </div>

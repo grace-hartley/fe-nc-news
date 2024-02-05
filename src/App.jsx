@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import Home from "./components/Home";
 import UserContext from "./contexts/UserContext";
 import UserList from "./components/UserList";
-import searchForArticles from "../api/articles";
+import { getArticles } from "./api";
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({
@@ -17,7 +17,7 @@ function App() {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    searchForArticles(setArticles);
+    getArticles(setArticles);
   }, []);
 
   return (
