@@ -7,10 +7,13 @@ const Nav = () => {
   return (
     <div>
       <nav>
-        <Link to="/users">
-          <button>Change User</button>
+        <Link to="/users" style={{ textDecoration: "none" }}>
+          <button className="change-user">Change User</button>
         </Link>
-        <Link to={`/users/${loggedInUser.username}`}>
+        <Link
+          to={`/users/${loggedInUser.username}`}
+          style={{ textDecoration: "none" }}
+        >
           <button className="user-profile-button">
             <p>{loggedInUser.username}</p>
             <img

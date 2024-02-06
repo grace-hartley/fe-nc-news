@@ -1,10 +1,11 @@
+import { useState } from "react";
 import ArticleList from "./ArticleList";
 
-const Home = ({ articles }) => {
+const Home = () => {
   return (
     <>
       <h2>Top Articles</h2>
-      <ArticleList articles={articles} />
+      <ArticleList />
     </>
   );
 };
