@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Home from "./components/Home";
 import UserContext from "./contexts/UserContext";
 import UserList from "./components/UserList";
+import UserCard from "./components/UserCard";
 import { getArticles } from "./api";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home articles={articles} />} />
           <Route path="/users" element={<UserList />} />
+          <Route path="/users/:username" element={<UserCard />} />
         </Routes>
       </UserContext.Provider>
     </>

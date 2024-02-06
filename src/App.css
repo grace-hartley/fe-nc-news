@@ -1,6 +1,6 @@
 #root {
   padding: 1rem;
-  /* text-align: center; */
+  /* background-color: #eae2b7; */
 }
 
 .avatar {
@@ -12,7 +12,7 @@ header {
   justify-content: space-between;
   margin: 0;
   align-items: center;
-  background-color: brown;
+  background-color: #d62828;
 }
 h1 {
   font-size: 2em;
@@ -23,26 +23,23 @@ h1 {
 nav {
   display: flex;
   align-items: center;
+
+  button {
+    border-radius: 50px;
+    border: 1px solid transparent;
+    padding: 0.6em 1em;
+    font-size: 0.5em;
+    font-weight: 500;
+    font-family: inherit;
+  }
 }
 
-button {
-  border-radius: 50px;
-  border: 1px solid transparent;
-  padding: 0.6em 1em;
-  font-size: 0.5em;
-  font-weight: 500;
-  font-family: inherit;
-}
 .user-profile-button {
   display: flex;
 }
 .user-profile-button p {
   margin-right: 5px;
   text-decoration: none;
-}
-
-.article-img {
-  max-width: 100%;
 }
 
 ul {
@@ -53,14 +50,50 @@ ul {
 .article-list {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   align-items: center;
-}
-.article-list-item {
-  border-radius: 15px;
-  border: 1px solid rgb(115, 0, 0);
-  padding: 10px;
-  margin: 10px;
+
+  .article-list-item {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    border-radius: 15px;
+    border: 1px solid #d62828;
+    padding: 10px;
+    margin: 10px;
+    /* background-color: #fcbf49; */
+
+    .article-img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      margin-right: 10px;
+    }
+
+    .article-details {
+      flex: 1;
+
+      h4 {
+        padding: 0;
+        margin: 0;
+        font-weight: 350;
+        font-size: 0.9em;
+        text-align: right;
+      }
+
+      h3 {
+        padding: 0;
+        margin: 0;
+        color: #003049;
+      }
+
+      p {
+        padding: 0;
+        margin: 0;
+        font-size: 0.8em;
+        text-align: right;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 300px) {

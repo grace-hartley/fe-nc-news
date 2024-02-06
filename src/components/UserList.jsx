@@ -1,5 +1,5 @@
 const UserList = () => {
-  return <>Users</>;
+  return <>Users coming soon...</>;
 };
 
 export default UserList;
