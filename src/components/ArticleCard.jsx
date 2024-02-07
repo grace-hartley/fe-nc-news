@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { getArticleByID, getArticleComments, getUsers } from "../api";
 import { parseISO, format } from "date-fns";
 import Expandable from "./Expandable";
+import UserContext from "../contexts/UserContext";
 
 const ArticleCard = () => {
   const [articleCard, setArticleCard] = useState({});
@@ -10,6 +11,7 @@ const ArticleCard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [articleComments, setArticleComments] = useState([]);
   const [users, setUsers] = useState([]);
+  const { loggedInUser } = useContext(UserContext);
 
   useEffect(() => {
     if (article_id) {
@@ -59,8 +61,9 @@ const ArticleCard = () => {
           <p>{articleCard.body}</p>
         </div>
         <div className="article-votes">
-          <p>votes: {articleCard.votes}</p>
           <button>👍</button>
+          <p>votes: {articleCard.votes}</p>
+          <button>👎</button>
         </div>
       </section>
       <Expandable>
@@ -77,7 +80,11 @@ const ArticleCard = () => {
                   <div className="comment-details">
                     <h5>{comment.author}</h5>
                     <p>{comment.body}</p>
+                    <h6>{formatDate(comment.created_at)}</h6>
                   </div>
+                  {loggedInUser.username === comment.author ? (
+                    <button className="delete-comment">Delete Comment</button>
+                  ) : null}
                 </li>
               );
             })}
