@@ -41,3 +41,14 @@ export const getUsers = () => {
       return response.data.users;
     });
 };
+
+export const patchArticleVotes = (id, newVotes) => {
+  return axios
+    .patch(
+      `https://backend-project-nc-news-t9vr.onrender.com/api/articles/${id}`,
+      { inc_votes: newVotes }
+    )
+    .then((response) => {
+      return response.data.article;
+    });
+};
