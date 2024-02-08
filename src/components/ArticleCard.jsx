@@ -83,8 +83,9 @@ const ArticleCard = () => {
           <p>{articleCard.body}</p>
         </div>
         <div className="article-votes">
+          {err ? <p>{err}</p> : null}
           <button onClick={handleThumbsUp}>👍</button>
-          <p>votes: {articleCard.votes}</p>
+          <p>{articleCard.votes}</p>
           <button onClick={handleThumbsDown}>👎</button>
         </div>
       </section>
