@@ -52,3 +52,19 @@ export const patchArticleVotes = (id, newVotes) => {
       return response.data.article;
     });
 };
+
+export const postComment = (id, username, body) => {
+  const commentToPost = {
+    body: body,
+    article_id: id,
+    username: username,
+  };
+  return axios
+    .post(
+      `https://backend-project-nc-news-t9vr.onrender.com/api/articles/${id}/comments`,
+      commentToPost
+    )
+    .then((response) => {
+      return response.data.comments;
+    });
+};
