@@ -5,7 +5,6 @@ import Expandable from "./Expandable";
 import UserContext from "../contexts/UserContext";
 import { formatDate } from "../utils/format-date";
 import Votes from "./Votes";
-import AddComment from "./AddComment";
 import Comments from "./Comments";
 
 const ArticleCard = () => {
@@ -64,12 +63,6 @@ const ArticleCard = () => {
         </div>
       </section>
       <Expandable>
-        <section className="new-comment">
-          <AddComment
-            article_id={article_id}
-            setArticleComments={setArticleComments}
-          ></AddComment>
-        </section>
         <section className="article-comments">
           <Comments
             article_id={article_id}
