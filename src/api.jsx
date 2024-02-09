@@ -68,3 +68,13 @@ export const postComment = (id, username, body) => {
       return response.data.comments;
     });
 };
+
+export const deleteComment = (comment_id) => {
+  return axios
+    .delete(
+      `https://backend-project-nc-news-t9vr.onrender.com/api/comments/${comment_id}`
+    )
+    .then((response) => {
+      return `Comment ID: ${comment_id} deleted`;
+    });
+};
