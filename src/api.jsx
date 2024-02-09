@@ -34,6 +34,16 @@ export const getTopics = () => {
     });
 };
 
+export const getArticlesByTopic = (topic) => {
+  return axios
+    .get(
+      `https://backend-project-nc-news-t9vr.onrender.com/api/articles?topic=${topic}`
+    )
+    .then((response) => {
+      return response.data.articles;
+    });
+};
+
 export const getUsers = () => {
   return axios
     .get("https://backend-project-nc-news-t9vr.onrender.com/api/users/")

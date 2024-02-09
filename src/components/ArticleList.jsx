@@ -20,14 +20,14 @@ const ArticleList = () => {
 
   return (
     <ul className="article-list">
-      {articles.map((article, index) => {
+      {articles.map((article) => {
         return (
           <Link
             to={`/articles/${article.article_id}`}
             key={article.article_id}
             style={{ textDecoration: "none" }}
           >
-            <li key={index} className="article-list-item">
+            <li key={article.article_id} className="article-list-item">
               <div className="article-img-container">
                 <img
                   src={article.article_img_url}

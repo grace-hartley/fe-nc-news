@@ -7,6 +7,7 @@ import UserContext from "./contexts/UserContext";
 import UserList from "./components/UserList";
 import UserCard from "./components/UserCard";
 import ArticleCard from "./components/ArticleCard";
+import ArticlesByTopic from "./components/ArticlesByTopic";
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({
@@ -23,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/articles/:article_id" element={<ArticleCard />} />
+          <Route path="/topics/:topic" element={<ArticlesByTopic />} />
           <Route path="/users" element={<UserList />} />
           <Route path="/users/:username" element={<UserCard />} />
         </Routes>
