@@ -1,14 +1,12 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import {
-  getArticleByID,
-  getArticleComments,
-  getUsers,
-  patchArticleVotes,
-} from "../api";
-import { parseISO, format } from "date-fns";
+import { getArticleByID, getArticleComments, getUsers } from "../api";
 import Expandable from "./Expandable";
 import UserContext from "../contexts/UserContext";
+import { formatDate } from "../utils/format-date";
+import Votes from "./Votes";
+import AddComment from "./AddComment";
+import Comments from "./Comments";
 
 const ArticleCard = () => {
   const [articleCard, setArticleCard] = useState({});
@@ -17,7 +15,6 @@ const ArticleCard = () => {
   const [articleComments, setArticleComments] = useState([]);
   const [users, setUsers] = useState([]);
   const { loggedInUser } = useContext(UserContext);
-  const [err, setErr] = useState(null);
 
   useEffect(() => {
     if (article_id) {
@@ -32,35 +29,11 @@ const ArticleCard = () => {
     getUsers().then((userList) => {
       setUsers(userList);
     });
-  }, []);
-
-  const formatDate = (dateStr) => {
-    if (!dateStr) {
-      return "";
-    }
-    const parsedDate = parseISO(dateStr);
-    return format(new Date(parsedDate), "MMMM dd, yyyy");
-  };
+  }, [article_id]);
 
   const getAuthorAvatar = (author) => {
     const user = users.find((user) => user.username === author);
     return user ? user.avatar_url : "";
-  };
-
-  const handleVotes = (newVotes) => {
-    patchArticleVotes(articleCard.article_id, newVotes)
-      .then((updatedArticle) => {
-        return setArticleCard(updatedArticle);
-      })
-      .catch((err) => {
-        setErr("Something went wrong, please try again.");
-      });
-  };
-  const handleThumbsUp = () => {
-    handleVotes(1);
-  };
-  const handleThumbsDown = () => {
-    handleVotes(-1);
   };
 
   if (isLoading) {
@@ -82,40 +55,28 @@ const ArticleCard = () => {
           <h3>{articleCard.title}</h3>
           <p>{articleCard.body}</p>
         </div>
-        <div className="article-votes">
-          {err ? <p>{err}</p> : null}
-          <button onClick={handleThumbsUp}>👍</button>
-          <p>{articleCard.votes}</p>
-          <button onClick={handleThumbsDown}>👎</button>
+        <div>
+          <Votes
+            article_id={article_id}
+            articleCard={articleCard}
+            setArticleCard={setArticleCard}
+          ></Votes>
         </div>
       </section>
       <Expandable>
+        <section className="new-comment">
+          <AddComment
+            article_id={article_id}
+            setArticleComments={setArticleComments}
+          ></AddComment>
+        </section>
         <section className="article-comments">
-          {articleComments.length === 0 ? (
-            <p>This article doesn't have any comments yet!</p>
-          ) : (
-            <ul>
-              {articleComments.map((comment) => {
-                return (
-                  <li key={comment.comment_id} className="article-comment-card">
-                    <img
-                      src={getAuthorAvatar(comment.author)}
-                      alt={`${comment.author}'s avatar image`}
-                      className="comment-author-avatar"
-                    />
-                    <div className="comment-details">
-                      <h5>{comment.author}</h5>
-                      <p>{comment.body}</p>
-                      <h6>{formatDate(comment.created_at)}</h6>
-                    </div>
-                    {loggedInUser.username === comment.author ? (
-                      <button className="delete-comment">Delete Comment</button>
-                    ) : null}
-                  </li>
-                );
-              })}
-            </ul>
-          )}
+          <Comments
+            article_id={article_id}
+            articleComments={articleComments}
+            setArticleComments={setArticleComments}
+            getAuthorAvatar={getAuthorAvatar}
+          />
         </section>
       </Expandable>
     </>
