@@ -10,17 +10,22 @@ const AddComment = ({ article_id, setArticleComments }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setDisableButton(true);
     postComment(article_id, loggedInUser.username, newComment)
       .then((newComment) => {
-        setArticleComments((currentComments) => {
-          return [newComment, ...currentComments];
-        });
-        setDisableButton(false);
+        setArticleComments((currentComments) => [
+          newComment,
+          ...currentComments,
+        ]);
+        setNewComment("");
+        setErr(null);
       })
       .catch((err) => {
         setErr("Something went wrong, please try again.");
+      })
+      .finally(() => {
+        setDisableButton(false);
       });
-    setNewComment("");
   };
   return (
     <form

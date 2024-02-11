@@ -30,18 +30,21 @@ const UserList = () => {
       <ul className="user-list">
         {users.map((user) => {
           return (
-            <li key={user.username}>
+            <li key={user.username} className="user-item">
               <div className="user-avatar-container">
                 <img src={user.avatar_url} alt={`${user.username}'s avatar`} />
               </div>
-              <h3>{user.username}</h3>
-              <button
-                onClick={() => {
-                  changeUser(user);
-                }}
-              >
-                Login
-              </button>
+              <div className="user-info">
+                <h3>{user.username}</h3>
+                <button
+                  className="change-user-button"
+                  onClick={() => {
+                    changeUser(user);
+                  }}
+                >
+                  Login
+                </button>
+              </div>
             </li>
           );
         })}

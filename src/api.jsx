@@ -1,11 +1,15 @@
 import axios from "axios";
 
-export const getArticles = () => {
-  return axios
-    .get("https://backend-project-nc-news-t9vr.onrender.com/api/articles/")
-    .then((response) => {
-      return response.data.articles;
-    });
+export const getArticles = ({ sortBy, sortOrder }) => {
+  let path = "https://backend-project-nc-news-t9vr.onrender.com/api/articles";
+  if (sortBy && sortOrder) {
+    path += `?sortBy=${sortBy}&sortOrder=${sortOrder}`;
+  } else if (sortBy) {
+    path += `?sortBy=${sortBy}`;
+  }
+  return axios.get(path).then((response) => {
+    return response.data.articles;
+  });
 };
 
 export const getArticleByID = (id) => {
@@ -75,7 +79,7 @@ export const postComment = (id, username, body) => {
       commentToPost
     )
     .then((response) => {
-      return response.data.comments;
+      return response.data.comment;
     });
 };
 

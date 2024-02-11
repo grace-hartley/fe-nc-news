@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getArticlesByTopic } from "../api";
+import { getArticlesByTopic, getTopics } from "../api";
+import Sorting from "./Sorting";
+import TopicsList from "./TopicsList";
 
 const ArticlesByTopic = () => {
   const { topic } = useParams();
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [topics, setTopics] = useState([]);
+  const [selectedTopic, setSelectedTopic] = useState("");
 
   useEffect(() => {
     getArticlesByTopic(topic).then((articles) => {
@@ -14,12 +18,20 @@ const ArticlesByTopic = () => {
     });
   }, [topic]);
 
+  useEffect(() => {
+    getTopics().then((topics) => {
+      setTopics(topics);
+      setIsLoading(false);
+    });
+  }, []);
+
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
   return (
     <main>
+      <TopicsList topics={topics} setSelectedTopic={setSelectedTopic} />
       <h2>Showing all {topic} articles</h2>
       <ul className="article-list">
         {articles.map((article) => {

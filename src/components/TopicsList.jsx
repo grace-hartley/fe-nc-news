@@ -11,7 +11,9 @@ const TopicsList = ({ topics, setSelectedTopic }) => {
       {topics.map((topic) => {
         return (
           <Link to={`/topics/${topic.slug}`} key={topic.slug}>
-            <button onClick={handleClick}>{topic.slug}</button>
+            <button className="topic-button" onClick={handleClick}>
+              {topic.slug}
+            </button>
           </Link>
         );
       })}

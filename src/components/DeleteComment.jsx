@@ -4,7 +4,7 @@ import { deleteComment } from "../api";
 const DeleteComment = ({ setArticleComments, comment_id }) => {
   const [err, setErr] = useState("");
 
-  const handleDelete = (comment_id) => [
+  const handleDelete = (comment_id) => {
     deleteComment(comment_id).then(() => {
       setArticleComments((currentComments) => {
         return currentComments.filter(
@@ -14,8 +14,8 @@ const DeleteComment = ({ setArticleComments, comment_id }) => {
       }).catch(() => {
         setErr(true);
       });
-    }),
-  ];
+    });
+  };
 
   return (
     <div>
